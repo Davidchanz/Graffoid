@@ -14,10 +14,10 @@
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Canvas Grid.Column="1" Grid.Row="0" x:Name="myCanvas" Background="White" MouseLeftButtonDown="myCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseLeftButtonUp="myCanvas_MouseLeftButtonUp">
+        <Canvas Height="400" Width="400" Grid.Column="1" Grid.Row="0" x:Name="myCanvas" Background="White" MouseLeftButtonDown="myCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseLeftButtonUp="myCanvas_MouseLeftButtonUp">
             
         </Canvas>
-        <Button x:Name="LoadGraffButton" Grid.Column="0" Grid.Row="0" Height="50">
+        <Button x:Name="LoadGraffButton" Grid.Column="0" Grid.Row="0" Height="50" Click="LoadGraffButton_Click">
             Load Graff
         </Button>
     </Grid>

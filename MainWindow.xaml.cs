@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Graffoid
 {
@@ -32,9 +34,10 @@ namespace Graffoid
     public partial class MainWindow : Window
     {
         public List<ItemEllipse> ItemsStack;
-        public int radius, rend_range, currItem_indx;
+        public int radius, rend_range, currItem_indx, size;
         public bool move_enable;
         public ItemEllipse currItem;
+        public int[,] matrix;
         public MainWindow()
         {
             radius = 25;
@@ -98,6 +101,64 @@ namespace Graffoid
                     Canvas.SetLeft(myCanvas.Children[currItem_indx], PositionX);
                     Canvas.SetTop(myCanvas.Children[currItem_indx], PositionY);
                 }
+            }
+        }
+
+        private void LoadGraffButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            
+            openFileDialog.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+            string filePath;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    filePath = openFileDialog.FileName;
+                    StreamReader sr = new StreamReader(filePath);
+                    string str = sr.ReadToEnd();
+                    string [] rowmass = str.Split((char)13);
+                    size = rowmass.Length;
+                    matrix = new int[size,size];
+                    for(int i = 0; i < size; i++)
+                    {
+                        string[] colmass = rowmass[i].Split(',');
+                        for (int j = 0; j < size; j++)
+                        {
+                            matrix[i,j] = Int32.Parse(colmass[j]);
+                        }
+                    }
+                }
+                catch (System.ArgumentException)
+                {
+                    MessageBox.Show("Error: Invalid file");
+                    return;
+                }
+            }
+            for (double angle = 0; angle < (2.0 * Math.PI); angle = angle + (2 * Math.PI) / size)
+            {
+                int PositionX = (int)((myCanvas.Width / 2) + ((radius * size) * Math.Cos(angle)));
+                int PositionY = (int)((myCanvas.Height / 2) - ((radius * size) * Math.Sin(angle)));
+                
+                var newEllipse = new Ellipse();
+                newEllipse.Fill = Brushes.Green;
+                newEllipse.Width = radius * 2; //RectWidth;
+                newEllipse.Height = radius * 2; //RectHeight;
+                Canvas.SetLeft(newEllipse, PositionX);
+                Canvas.SetTop(newEllipse, PositionY);
+                myCanvas.Children.Add(newEllipse);
+                ItemsStack.Add(new ItemEllipse(PositionX, PositionY, radius));
+                /*for (int j = 0; j < size; j++)
+                {
+                    if(matrix[i, j] == 1)
+                    {
+
+
+                    }
+                }*/
             }
         }
     }
