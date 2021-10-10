@@ -60,7 +60,7 @@ namespace Graffoid
             }
         }
 
-            private void myCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void myCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton.ToString() == "Pressed")
             {
@@ -151,14 +151,25 @@ namespace Graffoid
                 Canvas.SetTop(newEllipse, PositionY);
                 myCanvas.Children.Add(newEllipse);
                 ItemsStack.Add(new ItemEllipse(PositionX, PositionY, radius));
-                /*for (int j = 0; j < size; j++)
+            }
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
                 {
-                    if(matrix[i, j] == 1)
+                    if (matrix[i, j] == 1)
                     {
-
-
+                        Line myLine = new Line();
+                        myLine.Stroke = Brushes.LightSteelBlue;
+                        myLine.X1 = (int)ItemsStack[i].coord.X + radius;
+                        myLine.X2 = (int)ItemsStack[j].coord.X + radius;
+                        myLine.Y1 = (int)ItemsStack[i].coord.Y + radius;
+                        myLine.Y2 = (int)ItemsStack[j].coord.Y + radius;
+                        myLine.HorizontalAlignment = HorizontalAlignment.Left;
+                        myLine.VerticalAlignment = VerticalAlignment.Center;
+                        myLine.StrokeThickness = 2;
+                        myCanvas.Children.Add(myLine);
                     }
-                }*/
+                }
             }
         }
     }
