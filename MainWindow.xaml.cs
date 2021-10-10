@@ -140,8 +140,8 @@ namespace Graffoid
             }
             for (double angle = 0; angle < (2.0 * Math.PI); angle = angle + (2 * Math.PI) / size)
             {
-                int PositionX = (int)((myCanvas.Width / 2) + ((radius * size) * Math.Cos(angle)));
-                int PositionY = (int)((myCanvas.Height / 2) - ((radius * size) * Math.Sin(angle)));
+                int PositionX = (int)((myCanvas.Width / 2) + ((radius * size) * Math.Cos(angle + (Math.PI / size)/2)));
+                int PositionY = (int)((myCanvas.Height / 2) - ((radius * size) * Math.Sin(angle + (Math.PI / size)/2)));
                 
                 var newEllipse = new Ellipse();
                 newEllipse.Fill = Brushes.Green;
