@@ -90,33 +90,13 @@ namespace Graffoid
         {
             int PositionX = (int)Math.Floor(e.GetPosition(myCanvas).X - radius);
             int PositionY = (int)Math.Floor(e.GetPosition(myCanvas).Y - radius);
-             if (e.LeftButton.ToString() == "Pressed")
-             //Проверяем нажата ли клавиша и наличие прямоугольника на этой позиции.
-             {
-
-                /* if (!move_enable)
-                 {
-                     for (int i = 0; i < ItemsStack.Count; i++)
-                     {
-                         if ((ItemsStack.ElementAt(i).coord.X >= PositionX) && (ItemsStack.ElementAt(i).coord.X <= PositionX + (rend_range * radius)) && (ItemsStack.ElementAt(i).coord.Y >= PositionY) && (ItemsStack.ElementAt(i).coord.Y <= PositionY + (rend_range * radius)))
-                         {
-                             if ((int)Math.Pow((double)(PositionX - ItemsStack.ElementAt(i).coord.X), 2.0) + (int)Math.Pow((double)(PositionY - ItemsStack.ElementAt(i).coord.Y), 2.0) <= radius * radius)
-                             {
-                                 move_enable = true;
-                                 currItem_indx = i;
-                                 currItem.coord.X = ItemsStack.ElementAt(i).coord.X;
-                                 currItem.coord.Y = ItemsStack.ElementAt(i).coord.Y;
-                                 currItem.radius = ItemsStack.ElementAt(i).radius;
-                                 break;
-                             }
-                         }
-                     }
-                 }*/
-            if (move_enable)
+            if (e.LeftButton.ToString() == "Pressed")
+            { 
+                if (move_enable)
                 {
                     //var newEllipse = (myCanvas.Children[currItem_indx]);
-                    Canvas.SetLeft((myCanvas.Children[currItem_indx]), PositionX);
-                    Canvas.SetTop((myCanvas.Children[currItem_indx]), PositionY);
+                    Canvas.SetLeft(myCanvas.Children[currItem_indx], PositionX);
+                    Canvas.SetTop(myCanvas.Children[currItem_indx], PositionY);
                 }
             }
         }
