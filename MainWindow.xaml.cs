@@ -31,6 +31,7 @@ namespace Graffoid
             radius = rad;
         }
     }
+    //ахуенно важный коментарий
     public partial class MainWindow : Window
     {
         public List<ItemEllipse> ItemsStack;
